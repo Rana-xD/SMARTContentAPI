@@ -7,7 +7,7 @@ from dejavu import Dejavu
 app = Flask(__name__)
 @app.route('/')
 def index():
-   return render_template('index.html',status=0,code="00")
+   return render_template('index.html')
 
 @app.route('/uploader', methods = ['GET', 'POST'])
 def uploader():
@@ -23,17 +23,9 @@ def uploader():
   config = json.load(f)
  djv = Dejavu(config)
  song = djv.recognize(FileRecognizer, "temp/"+filename)
- confidence = song['confidence']
  path = "temp/"+filename
  os.remove(path)
- if(confidence<50):
-     status = 1
-     code = "Unknown song"
-     return render_template('index.html',status=status,code=code)
- else:
-     status = 1
-     code = song['song_name']
-     return render_template('index.html',status=status,code=code)
+ return "From file we recognized: %s\n" % song
 
 @app.route('/fingerprint')
 def fingerprint():
