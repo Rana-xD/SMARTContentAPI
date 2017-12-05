@@ -19,20 +19,12 @@
  	    URL.revokeObjectURL(this.src);
  	  }
  	}
-	 var copyright = {{ copyright }};
-	 var illegal_content = {{ illegal_content }};
-	 var success = {{ success }};
-	 if(copyright == 1)
-		 {
-			 swal("Opps","Your request custom calltune contain copyright song. You weren't allow to use it","error")
-		 }
-	 if(illegal_content== 1)
+	 var code = {{ code }};
+	 var a = String(code);
+	 var status = {{ status }};
+	 if(status==1)
 	 {
-		 swal("Opps","You request custom calltune might contain illegal content. Please modily it.","error")
-	 }
-	 if(success==1)
-	 {
-		 swal("Done","Your request custom calltune will be aprove soon","success")
+		 	swal(a)
 	 }
 	});
 	</script>
