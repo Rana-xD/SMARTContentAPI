@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template,jsonify
 from dejavu.recognize import FileRecognizer, MicrophoneRecognizer
 from werkzeug import secure_filename
 import json
@@ -25,7 +25,7 @@ def uploader():
  song = djv.recognize(FileRecognizer, "temp/"+filename)
  path = "temp/"+filename
  os.remove(path)
- return "From file we recognized: %s\n" % song
+ return jsonify(song)
 
 @app.route('/fingerprint')
 def fingerprint():
