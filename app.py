@@ -11,6 +11,13 @@ def index():
 
 @app.route('/uploader', methods = ['GET', 'POST'])
 def uploader():
+ if request.method == 'POST':
+   print request
+   if 'file' not in request.files:
+     print('No file part')
+   file = request.files['file']
+   if file.filename == '':
+     print('No selected file')
  file = request.files['file']
  filename = secure_filename(file.filename)
 
@@ -25,7 +32,14 @@ def uploader():
  song = djv.recognize(FileRecognizer, "temp/"+filename)
  path = "temp/"+filename
  os.remove(path)
- return jsonify(song)
+ title = song["song_name"]
+ confidence = song["confidence"]
+ if(confidence<50):
+   result = {'title' : "Unknown Song"}
+   return jsonify(result)
+ else:
+    result = {'title' : title}
+    return jsonify(result)
 
 @app.route('/fingerprint')
 def fingerprint():
