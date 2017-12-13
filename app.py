@@ -11,6 +11,7 @@ def index():
 
 @app.route('/uploader', methods = ['GET', 'POST'])
 def uploader():
+ result = ""
  if request.method == 'POST':
    print request
    if 'file' not in request.files:
@@ -36,10 +37,9 @@ def uploader():
  confidence = song["confidence"]
  if(confidence<50):
    result = {'title' : "Unknown Song"}
-   return jsonify(result)
  else:
-    result = {'title' : title}
-    return jsonify(result)
+   result = {'title' : title}
+ return jsonify(result)
 
 @app.route('/fingerprint')
 def fingerprint():
