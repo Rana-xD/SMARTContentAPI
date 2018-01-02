@@ -7,7 +7,7 @@ from dejavu import Dejavu
 app = Flask(__name__)
 @app.route('/')
 def index():
-   return render_template('index.html')
+   return render_template('index.html',code=0)
 
 @app.route('/uploader', methods = ['GET', 'POST'])
 def uploader():
@@ -41,13 +41,23 @@ def uploader():
    result = {'title' : title}
  return jsonify(result)
 
-@app.route('/fingerprint')
+@app.route('/fingerprint',methods = ['GET','POST'])
 def fingerprint():
-    with open("dejavu.cnf.SAMPLE") as f:
-     config = json.load(f)
-    djv = Dejavu(config)
-    djv.fingerprint_directory("songs", [".mp3"])
-    return "Finish"
+  uploaded_files = request.files.getlist("files")
+  for file in uploaded_files:
+    filename = secure_filename(file.filename)
+    file.save(os.path.join("song",filename))
+  print "Mean aii"
+  with open("dejavu.cnf.SAMPLE") as f:
+    config = json.load(f)
+  djv = Dejavu(config)
+  djv.fingerprint_directory("song", [".mp3"])
+  for file in uploaded_files:
+    filename = secure_filename(file.filename)
+    path = "song/"+filename
+    os.remove(path)
+  print "Delete aii"
+  return render_template('index.html',code=1)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')

@@ -9,22 +9,12 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script type="text/javascript">
-	$( document ).ready(function() {
-		input.onchange = function(e){
- 	  var sound = document.getElementById('sound');
- 	  sound.src = URL.createObjectURL(this.files[0]);
- 	  // not really needed in this exact case, but since it is really important in other cases,
- 	  // don't forget to revoke the blobURI when you don't need it
- 	  sound.onend = function(e) {
- 	    URL.revokeObjectURL(this.src);
- 	  }
- 	}
+	$(document).ready(function() {
 	 var code = {{ code }};
-	 var a = String(code);
-	 var status = {{ status }};
-	 if(status==1)
+
+	 if(code==1)
 	 {
-		 	swal(a)
+		 	swal("Done","Your uploaded songs are already fingerprinted","success")
 	 }
 	});
 	</script>
@@ -42,7 +32,6 @@
 <body>
 	<div class="text-center" id="hh">
 	    <div>
-	  <h1 style="color: cadetblue;font-family: cursive;">Make Your Own Call Tune Here!</h1>
 	  </div>
 	</div>
 
@@ -50,13 +39,11 @@
 <div style="margin: 50px 350px 50px 350px; height: 350px; -moz-box-shadow:    inset 0 0 10px #000000;
    -webkit-box-shadow: inset 0 0 10px #000000;
    box-shadow:         inset 0 0 10px #000000;" >
-<form style="padding: 70px" action="uploader" method="POST" enctype="multipart/form-data">
+<form style="padding: 70px" action="fingerprint" method="POST" enctype="multipart/form-data">
 <div class="form-group">
     <label for="audio">Upload Your Audio</label>
-    <input type="file" class="form-control-file" id="input" name="file">
-
+    <input type="file" class="form-control-file" id="input" name="files" multiple>
   </div>
-   <audio id="sound" controls></audio> <br/>
   <div style="margin-top: 15px">
 <input type="submit" class="btn btn-success" value="Upload">
  </div>
