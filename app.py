@@ -44,7 +44,7 @@ def uploader():
 #  info = json.loads(infoJson.text)
 #  print infoJson
 #  print info
- return infoJson
+ return jsonify(infoJson)
 
 @app.route('/fingerprint',methods = ['GET','POST'])
 def fingerprint():
