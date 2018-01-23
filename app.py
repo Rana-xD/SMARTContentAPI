@@ -2,6 +2,7 @@ from flask import Flask, request, render_template,jsonify
 from dejavu.recognize import FileRecognizer, MicrophoneRecognizer
 from werkzeug import secure_filename
 import json
+import requests
 import os
 from dejavu import Dejavu
 app = Flask(__name__)
@@ -39,6 +40,8 @@ def uploader():
    result = {'title' : "Unknown Song"}
  else:
    result = {'title' : title}
+ re = requests.get('128.199.181.183:5000/?title='+title)
+ print(re)
  return jsonify(result)
 
 @app.route('/fingerprint',methods = ['GET','POST'])
