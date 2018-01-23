@@ -41,7 +41,7 @@ def uploader():
  else:
    result = {'title' : title}
  info = requests.get('http://128.199.181.183:5000/?title='+title)
- return jsonify(info.text)
+ return info.text
 
 @app.route('/fingerprint',methods = ['GET','POST'])
 def fingerprint():
