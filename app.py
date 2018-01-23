@@ -40,7 +40,7 @@ def uploader():
    result = {'title' : "Unknown Song"}
  else:
    result = {'title' : title}
- re = requests.get('128.199.181.183:5000/?title='+title)
+ re = requests.get('http://128.199.181.183:5000/?title='+title)
  print(re)
  return jsonify(result)
 
