@@ -34,7 +34,7 @@ def uploader():
  song = djv.recognize(FileRecognizer, "temp/"+filename)
  path = "temp/"+filename
  os.remove(path)
- title = song["song_name"].str('_',' ')
+ title = song["song_name"].replace('_',' ')
  confidence = song["confidence"]
  if(confidence<50):
    result = {'title' : "Unknown Song"}
