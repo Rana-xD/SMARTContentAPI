@@ -77,11 +77,11 @@ def crbt():
  if(confidence<50):
    result = {'title' : "Unknown Song"}
  else:
-   result = requests.get('http://128.199.181.183:5000/?title='+title).json()
+   result = {'title' : title}
  return jsonify(result)
 
 
->>>>>>> 71893409704cc28c1bd08183be8594a5a007bf08
+
 
 @app.route('/fingerprint',methods = ['GET','POST'])
 def fingerprint():
